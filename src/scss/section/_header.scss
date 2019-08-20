@@ -1,0 +1,22 @@
+.main-header {
+  background-color: #FFE5B4;
+
+  .wrapper {
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  ul {
+    display: flex;
+
+    li {
+      padding: 0 15px;
+    }
+  }
+
+  .button-block {
+    display: flex;
+  }
+}
