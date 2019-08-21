@@ -49,7 +49,7 @@ class MainRouting extends React.Component {
                             <Route path="/" component={Header}/>
                             <Switch>
                                 <Route exact path="/" component={Homepage}/>
-                                <Route exact path="/new" component={AppPage}/>
+                                <Route exact path="/app" component={AppPage}/>
                                 <Route component={pageNotFound}/>
                             </Switch>
                             <Route path="/" component={Footer}/>

@@ -13,32 +13,54 @@ class AddNewCostsPopup extends React.Component {
             description: '',
             sum: '',
             category: '',
-            type: ''
+            typeCosts: ''
         };
 
-        this.addNewCost = this.addNewCost.bind(this);
         this.StateValue = this.StateValue.bind(this);
+        this.addNewCostsAction = this.addNewCostsAction.bind(this);
     }
 
-    addNewCost(e) {
+    addNewCostsAction(e) {
         e.preventDefault();
         let newData = {
-            date: this.state.date,
-            description: this.state.description,
-            sum: this.state.sum,
-            category: this.state.category,
-            type: this.state.type
+            "date": this.state.date,
+            "description": this.state.description,
+            "sum": this.state.sum,
+            "category": this.state.category,
+            "typeCosts": this.state.type
         };
 
-        console.log(newData);
-
-        this.props.addNewCostToCurrentMonthAction(newData);
+        // let newData1 = {
+        //     "date":  new Date().toISOString().substr(0, 10),
+        //     "description": 'sad',
+        //     "sum": 12341,
+        //     "category": 'test1',
+        //     "typeCosts": 'testtype'
+        // };
+        fetch(`http://localhost:3170/addcosts`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': "no-cors"
+            },
+            method: 'POST',
+            body: JSON.stringify(newData)
+        })
+            .then(function (response) {
+                return response.json();
+                console.log(json);
+            }).then((json) => {
+            console.log(json);
+            // this.props.addNewCostToCurrentMonthAction(newData);
+        })
     }
-
 
     StateValue(e) {
         const {name, value} = e.target;
         this.setState({[name]: value});
+    }
+
+    componentDidMount() {
+
     }
 
 
@@ -50,7 +72,7 @@ class AddNewCostsPopup extends React.Component {
                         Добавьте новую запись о расходах
                     </h3>
 
-                    <form onSubmit={this.addNewCost}>
+                    <form onSubmit={this.addNewCostsAction}>
                         <label>
                             <span>Дата</span>
                             <input type="date"
@@ -83,13 +105,13 @@ class AddNewCostsPopup extends React.Component {
                                     onChange={this.StateValue}
                                     value={this.state.category}
                             >
-                                <option value="1">Продукты</option>
-                                <option value="2">Коммунальные услуги</option>
-                                <option value="3">Одежда/обувь</option>
-                                <option value="4">Хозтовары</option>
-                                <option value="5">Спорт</option>
-                                <option value="6">Развлечения</option>
-                                <option value="7">Авто</option>
+                                <option value="Продукты">Продукты</option>
+                                <option value="Коммунальные услуги">Коммунальные услуги</option>
+                                <option value="Одежда/обувь">Одежда/обувь</option>
+                                <option value="Хозтовары">Хозтовары</option>
+                                <option value="Спорт">Спорт</option>
+                                <option value="Развлечения">Развлечения</option>
+                                <option value="Авто">Авто</option>
                             </select>
                         </label>
 
@@ -97,11 +119,11 @@ class AddNewCostsPopup extends React.Component {
                             <span>Тип расходов</span>
                             <select name="type"
                                     onChange={this.StateValue}
-                                    value={this.state.type}
+                                    value={this.state.typeCosts}
                             >
-                                <option value="1">Ежемесячный</option>
-                                <option value="2">Годовой</option>
-                                <option value="3">Непредвиденный</option>
+                                <option value="Ежемесячный">Ежемесячный</option>
+                                <option value="Годовой">Годовой</option>
+                                <option value="Непредвиденный">Непредвиденный</option>
                             </select>
                         </label>
 
